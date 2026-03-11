@@ -1,16 +1,25 @@
-# React + Vite
+OMNI SCHOOL MANAGEMENT SYSTEM
+Streamline school management, class organization, and add students and faculty.
+Seamlessly track attendance, assess performance, and provide feedback.
+Access records, view marks, and communicate effortlessly.
+About
+The School Management System is a web-based application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It aims to streamline school management, class organization, and facilitate communication between students, teachers, and administrators.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features
+User Roles: The system supports three user roles: Admin, Teacher, and Student. Each role has specific functionalities and access levels.
 
-Currently, two official plugins are available:
+Admin Dashboard: Administrators can add new students and teachers, create classes and subjects, manage user accounts, and oversee system settings.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Attendance Tracking: Teachers can easily take attendance for their classes, mark students as present or absent, and generate attendance reports.
 
-## React Compiler
+Performance Assessment: Teachers can assess students' performance by providing marks and feedback. Students can view their marks and track their progress over time.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Data Visualization: Students can visualize their performance data through interactive charts and tables, helping them understand their academic performance at a glance.
 
-## Expanding the ESLint configuration
+Communication: Users can communicate effortlessly through the system. Teachers can send messages to students and vice versa, promoting effective communication and collaboration.
+Technologies Used
+Frontend: React.js, VITE
+Backend: Node.js, Express.js
+Database: MongoDB
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
