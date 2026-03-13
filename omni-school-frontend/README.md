@@ -22,4 +22,12 @@ Frontend: React.js, VITE
 Backend: Node.js, Express.js
 Database: MongoDB
 
+## 🚧 Phase 2: Professional MERN Refactor
+- [x] Migrate Inline Styles to Tailwind/Modular CSS.
+- [x] Implement Mongoose Schema for Students & Faculty.
+- [ ] Implement CSV Bulk Import for Student Records.
+- [ ] Add Role-Based Access Control (RBAC) for Admin/Teacher.
 
+### 🚀 How to Run
+1. `cd omni-school-backend` -> `npm start`
+2. `cd omni-school-frontend` -> `npm run dev`
