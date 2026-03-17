@@ -21,10 +21,17 @@ Technologies Used
 Frontend: React.js, VITE
 Backend: Node.js, Express.js
 Database: MongoDB
-UI & Design
+UI/UX Improvements
 Color Scheme: Professional Silver (#C0C0C0), Charcoal Grey (#333333), Black (#1a1a1a), and White.
 Interactivity:Fluid hover effects on all buttons and navigation links.
-Responsiveness: Fully optimized for multiple screens, including legacy devices like **iPhone 4**.
+Responsiveness: Fully optimized for multiple screens, including legacy devices like iphone and legacy:
+Optimized 1200px centered grid.
+Adaptive padding and flexible navigation.
+Custom overrides for iPhone 4 (320px) ensuring no horizontal scrolling and readable font sizes.
+Added cubic-bezier transitions on all buttons for smooth, tactile hover states.
+Added cubic-bezier transitions on all buttons for smooth, tactile hover states.
+
+
 ## 🚧 Phase 2: Professional MERN Refactor
 - [x] Migrate Inline Styles to Tailwind/Modular CSS.
 - [x] Implement Mongoose Schema for Students & Faculty.

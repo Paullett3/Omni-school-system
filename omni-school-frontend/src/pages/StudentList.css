@@ -1,0 +1,75 @@
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.student-card {
+  background: var(--primary-black);
+  color: var(--white);
+  border: 1px solid var(--silver);
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.student-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--white);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid var(--dark-grey);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.profile-icon {
+  font-size: 2rem;
+  color: var(--silver);
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+.progress-bg {
+  background: #444;
+  height: 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  background: var(--silver);
+  height: 100%;
+  border-radius: 4px;
+}
+
+.btn-delete {
+  margin-top: 15px;
+  width: 100%;
+  background: transparent;
+  color: #ff4d4d; /* Red for alert */
+  border: 1px solid #ff4d4d;
+}
+
+.btn-delete:hover {
+  background: #ff4d4d;
+  color: white;
+}
+
+/* iPhone 4 Adjustment */
+@media (max-width: 320px) {
+  .student-grid {
+    grid-template-columns: 1fr;
+  }
+}
