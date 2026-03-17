@@ -1,29 +1,55 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import axios from "axios"; // For MERN backend connection
+import Navbar from "./components/Navbar";
 import StudentList from "./components/StudentList";
+import TeacherDashboard from "./pages/TeacherDashboard";
+import ParentPortal from "./pages/ParentPortal";
+import "./App.css";
 
 function App() {
-  const [students, setStudents] = useState(() => {
-    const saved = localStorage.getItem("omni_data");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [students, setStudents] = useState([]);
 
-  // Logic to delete (Keep it in the parent!)
-  const deleteStudent = (id) => {
-    setStudents(students.filter((s) => s.id !== id));
+  // MERN Logic: Fetch from MongoDB via Backend API
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/students");
+        setStudents(res.data);
+      } catch (err) {
+        console.error("Error fetching data from MongoDB", err);
+      }
+    };
+    fetchStudents();
+  }, []);
+
+  const deleteStudent = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/students/${id}`);
+      setStudents(students.filter((s) => s._id !== id));
+    } catch (err) {
+      console.error("Delete failed", err);
+    }
   };
 
   return (
-    <div
-      style={{
-        padding: "40px",
-        backgroundColor: "#f0f2f5",
-        minHeight: "100vh",
-      }}
-    >
-      <h1>🏫 Omni School Management</h1>
-      {/* Passing data down as PROPS */}
-      <StudentList students={students} deleteStudent={deleteStudent} />
-    </div>
+    <Router>
+      <div className="app-main">
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route path="/admin" element={
+              <>
+                <h1>🏫 Admin: Omni School Management</h1>
+                <StudentList students={students} deleteStudent={deleteStudent} />
+              </>
+            } />
+            <Route path="/teacher" element={<TeacherDashboard />} />
+            <Route path="/parent-login" element={<ParentPortal />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 

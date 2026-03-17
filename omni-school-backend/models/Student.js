@@ -1,26 +1,22 @@
 const mongoose = require('mongoose');
 
-const StudentSchema = new mongoose.Schema({
-  // Link to the User account (for Login)
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  
-  studentID: { type: String, required: true, unique: true },
+const studentSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  currentClass: { type: String, required: true },
-  
-  // Requirement: Academic History
-  grades: [{
-    subject: String,
-    score: Number,
-    term: String
-  }],
-  
-  // Requirement: Parent/Guardian Link
-  parentName: String,
-  parentContact: String
-}, { timestamps: true });
+  age: Number,
+  grade: String,
+  performance: {
+    math: { type: Number, default: 0 },
+    science: { type: Number, default: 0 },
+    english: { type: Number, default: 0 }
+  },
+  attendance: [
+    {
+      date: { type: Date, default: Date.now },
+      status: { type: String, enum: ['Present', 'Absent', 'Late'], default: 'Present' }
+    }
+  ],
+  parentEmail: { type: String, required: true }, // Links to Parent login
+  comments: [String]
+});
 
-// HUMAN NOTE: This makes searching by name super fast!
-StudentSchema.index({ name: 'text' });
-
-module.exports = mongoose.model('Student', StudentSchema);
+module.exports = mongoose.model('Student', studentSchema);
