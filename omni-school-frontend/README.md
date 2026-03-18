@@ -17,7 +17,7 @@ Performance Assessment: Teachers can assess students' performance by providing m
 Data Visualization: Students can visualize their performance data through interactive charts and tables, helping them understand their academic performance at a glance.
 
 Communication: Users can communicate effortlessly through the system. Teachers can send messages to students and vice versa, promoting effective communication and collaboration.
-Technologies Used
+**Technologies Used **
 Frontend: React.js, VITE
 Backend: Node.js, Express.js
 Database: MongoDB
@@ -28,9 +28,20 @@ Responsiveness: Fully optimized for multiple screens, including legacy devices l
 Optimized 1200px centered grid.
 Adaptive padding and flexible navigation.
 Custom overrides for iPhone 4 (320px) ensuring no horizontal scrolling and readable font sizes.
-Added cubic-bezier transitions on all buttons for smooth, tactile hover states.
-Added cubic-bezier transitions on all buttons for smooth, tactile hover states.
+## 🔐 Authentication & API Endpoints
 
+### Auth Routes (`/api/auth`)
+- `POST /register`: Accepts `name`, `email`, `password`, `role`. Hashes password and saves user.
+- `POST /login`: Authenticates user and returns a **JWT Token**.
+
+### Student Routes (`/api/students`)
+- `GET /`: Returns a list of all students (hides passwords).
+- `PUT /:id`: Updates student information by MongoDB ID.
+- `DELETE /:id`: Permanently removes a student from the system.
+
+## ⚙️ Requirements
+Ensure your `.env` file has a `JWT_SECRET` variable:
+`JWT_SECRET=your_super_secret_key_here`
 
 ## 🚧 Phase 2: Professional MERN Refactor
 - [x] Migrate Inline Styles to Tailwind/Modular CSS.
