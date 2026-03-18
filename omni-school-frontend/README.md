@@ -38,7 +38,15 @@ Custom overrides for iPhone 4 (320px) ensuring no horizontal scrolling and reada
 - `GET /`: Returns a list of all students (hides passwords).
 - `PUT /:id`: Updates student information by MongoDB ID.
 - `DELETE /:id`: Permanently removes a student from the system.
-
+## 🏗️ Data Architecture
+### User Schema
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `name` | String | Required, trimmed for whitespace |
+| `email` | String | Unique, validated via Regex |
+| `password` | String | Hashed, hidden from queries by default |
+| `role` | String | Enum: `student`, `teacher`, or `admin` |
+| `createdAt`| Date | Auto-generated timestamp |
 ## ⚙️ Requirements
 Ensure your `.env` file has a `JWT_SECRET` variable:
 `JWT_SECRET=your_super_secret_key_here`
