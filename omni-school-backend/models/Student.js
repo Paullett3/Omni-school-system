@@ -1,22 +1,41 @@
-const mongoose = require('mongoose');
+// models/Student.js
+import mongoose from 'mongoose';
 
 const studentSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  age: Number,
-  grade: String,
-  performance: {
-    math: { type: Number, default: 0 },
-    science: { type: Number, default: 0 },
-    english: { type: Number, default: 0 }
+  name: {
+    type: String,
+    required: true,
+    trim: true
   },
-  attendance: [
-    {
-      date: { type: Date, default: Date.now },
-      status: { type: String, enum: ['Present', 'Absent', 'Late'], default: 'Present' }
-    }
-  ],
-  parentEmail: { type: String, required: true }, // Links to Parent login
-  comments: [String]
+  admissionNumber: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  },
+  grade: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  // New: performance per subject
+  performance: {
+    math: { type: Number, min: 0, max: 100 },
+    english: { type: Number, min: 0, max: 100 },
+    science: { type: Number, min: 0, max: 100 },
+  },
+  parent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  teacher: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-module.exports = mongoose.model('Student', studentSchema);
+export default mongoose.model('Student', studentSchema);
