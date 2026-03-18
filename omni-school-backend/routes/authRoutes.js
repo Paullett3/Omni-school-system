@@ -20,5 +20,14 @@ app.use(express.json()); // Essential for parsing JSON bodies
 app.use('/api/auth', authRoutes);
 app.use('/api/students', studentRoutes);
 
+const express = require('express');
+const router = express.Router();
+
+// Placeholder – replace with real controllers later
+router.post('/register', (req, res) => res.json({ msg: 'Register endpoint' }));
+router.post('/login', (req, res) => res.json({ msg: 'Login endpoint' }));
+
+module.exports = router;
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

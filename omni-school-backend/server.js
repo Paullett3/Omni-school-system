@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
 
 dotenv.config();
 
@@ -15,12 +15,12 @@ app.use(express.json());
 connectDB();
 
 // Routes
-app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/students', require('./routes/studentRoutes'));
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/students", require("./routes/studentRoutes"));
 
 // Basic test route
-app.get('/', (req, res) => {
-  res.json({ message: 'Omni School Backend is running' });
+app.get("/", (req, res) => {
+  res.json({ message: "Omni School Backend is running" });
 });
 
 const PORT = process.env.PORT || 5000;
