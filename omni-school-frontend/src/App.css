@@ -128,3 +128,59 @@ button:active,
 .text-silver { color: var(--silver); }
 .bg-black { background-color: var(--primary-black); }
 
+/* 🏫 OMNI SCHOOL DASHBOARD STYLES */
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 📊 Table Styling */
+.bg-white {
+  background-color: #ffffff;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead tr {
+  background-color: #1e40af; /* Deep Kenyan Blue */
+  color: #ffffff;
+  text-align: left;
+}
+
+th, td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:hover {
+  background-color: #f8fafc; /* Subtle hover effect */
+  cursor: pointer;
+}
+
+/* 🟢 Performance Highlighters */
+.text-green-600 {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.text-orange-500 {
+  color: #f97316;
+}
+
+/* 🗑️ Action Buttons */
+.text-red-500:hover {
+  color: #dc2626;
+  transform: scale(1.2);
+  transition: 0.2s;
+}
