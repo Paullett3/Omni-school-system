@@ -1,26 +1,20 @@
-/**
- * 🔘 REUSABLE BUTTON COMPONENT
- * Variants: primary, danger, outline
- */
-import React from "react";
+import { motion } from 'framer-motion';
 
-const Button = ({
-  children,
-  onClick,
-  type = "button",
-  variant = "primary",
-  className = "",
-}) => {
-  const baseStyle = "btn-base"; // Define common styles in CSS
+export const Button = ({ children, onClick, variant = 'primary', className }) => {
+  const themes = {
+    primary: 'bg-blue-600 text-white hover:bg-blue-700',
+    danger: 'bg-red-500 text-white hover:bg-red-600',
+    outline: 'border-2 border-blue-400 text-blue-600 hover:bg-blue-50'
+  };
+
   return (
-    <button
-      type={type}
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       onClick={onClick}
-      className={`${baseStyle} btn-${variant} ${className}`}
+      className={`px-4 py-2 rounded-lg font-medium transition-all ${themes[variant]} ${className}`}
     >
       {children}
-    </button>
+    </motion.button>
   );
 };
-
-export default Button;

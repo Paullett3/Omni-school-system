@@ -1,20 +1,53 @@
 /**
- * 🎨 MODERN OMNI-THEME
- * ---------------------------------------
+ * 📚 OMNI SCHOOL BACKGROUND IMAGE
+ * High-Contrast, Bright, and Professional
  */
 :root {
-  --primary-bg: #0f172a; /* 🌑 Deep Navy Night */
-  --card-bg: #1e293b; /* 🃏 Lighter Slate for Cards */
-  --silver: #cbd5e1; /* 🥈 Soft Slate/Silver */
-  --accent-blue: #38bdf8; /* 💎 Electric Blue for Highlights */
-  --accent-red: #f43f5e; /* 🌹 For Admin/Alerts */
-  --white: #ffffff;
+  --sunny-glow: rgba(255, 221, 0, 0.4); /* ☀️ Accent for the library theme */
 }
 
 body {
   margin: 0;
-  background-color: var(--primary-bg);
-  color: var(--silver);
-  font-family: "Inter", sans-serif; /* Modern, clean font */
-  transition: background 0.5s ease;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+
+  /* 🎨 1. The New Image + Rich Gradient Overlay */
+  background:
+    linear-gradient(
+      135deg,
+      rgba(10, 10, 20, 0.85) 0%,
+      rgba(20, 20, 40, 0.3) 100%
+    ),
+    url("https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80");
+
+  /* 📏 2. Visual Optimization */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  /* 🪄 3. Bolder Colors Filter */
+  filter: saturate(1.1) contrast(1.05); /* Makes the books look extra vibrant */
+
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* 💠 Subtle page-wide glow to match the 'Neon' card */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
