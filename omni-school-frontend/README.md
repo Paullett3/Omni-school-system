@@ -42,7 +42,7 @@ Logging: Implemented terminal color-coding for rapid debugging of unauthorized a
 - `PUT /:id`: Updates student information by MongoDB ID.
 - `DELETE /:id`: Permanently removes a student from the system.
 ## 🏗️ Data Architecture
-### User Schema
+User Schema
 | Field | Type | Description |
 | :--- | :--- | :--- |
 | `name` | String | Required, trimmed for whitespace |
@@ -50,6 +50,12 @@ Logging: Implemented terminal color-coding for rapid debugging of unauthorized a
 | `password` | String | Hashed, hidden from queries by default |
 | `role` | String | Enum: `student`, `teacher`, or `admin` |
 | `createdAt`| Date | Auto-generated timestamp |
+## 🌱 Database Seeding
+To populate your local or Atlas database with sample Kenyan student records:
+1. Ensure your `.env` file is configured.
+2. Run the following command:
+   ```bash
+   npm run seed
 ## ⚙️ Requirements
 Ensure your `.env` file has a `JWT_SECRET` variable:
 `JWT_SECRET=your_super_secret_key_here`
