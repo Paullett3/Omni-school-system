@@ -1,0 +1,56 @@
+/* 🌑 Main Container */
+.login-container {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-black);
+}
+
+/* 🃏 The Card */
+.login-card {
+  background: #1e1e1e;
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--silver);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  width: 400px;
+}
+
+.login-card h2 { color: var(--silver); margin-bottom: 10px; }
+.login-card p { color: #888; margin-bottom: 30px; font-size: 0.9rem; }
+
+/* 🔢 The Button Grid */
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.role-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #2a2a2a;
+  color: var(--silver);
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.role-btn svg { font-size: 2rem; margin-bottom: 10px; }
+
+/* ✨ Role Specific Accents */
+.admin:hover { background: #e74c3c; color: white; }
+.teacher:hover { background: #3498db; color: white; }
+.student:hover { background: #2ecc71; color: white; }
+.parent:hover { background: #f1c40f; color: black; }
+
+.role-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
