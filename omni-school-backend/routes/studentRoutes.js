@@ -15,7 +15,11 @@ import {
 
 // 📂 IMPORT AUTH MIDDLEWARE
 import { protect, authorize } from '../middleware/authMiddleware.js';
-
+import { 
+  getStudents, 
+  addStudent, 
+  deleteStudent // 👈 Make sure this is here!
+} from '../controllers/studentController.js';
 /**
  * 🔓 PUBLIC/PROTECTED ROUTES
  */
