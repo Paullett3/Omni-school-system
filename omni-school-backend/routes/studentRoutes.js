@@ -1,47 +1,28 @@
 /**
- * 🛣️ STUDENT ROUTES
- * Defines access levels for student data and performance
+ * 🎓 STUDENT ROUTES
+ * ---------------------------------------
  */
 import express from 'express';
-const router = express.Router();
-
-// 📂 IMPORT CONTROLLERS
-import {
-  getStudents,
-  createStudent,
-  getStudentById,
-  updatePerformance // 🟢 Added this import
-} from '../controllers/studentController.js';
-
-// 📂 IMPORT AUTH MIDDLEWARE
-import { protect, authorize } from '../middleware/authMiddleware.js';
 import { 
   getStudents, 
-  addStudent, 
-  deleteStudent // 👈 Make sure this is here!
+  getStudentById, 
+  createStudent, 
+  updateStudent, 
+  deleteStudent 
 } from '../controllers/studentController.js';
-/**
- * 🔓 PUBLIC/PROTECTED ROUTES
- */
-// Only Admins can delete students
-router.delete('/:id', protect, authorize('admin'), deleteStudent);
+import { protect, authorize } from '../middleware/authMiddleware.js';
 
-// 👨‍🏫 TEACHER/ADMIN ONLY: View all students or create a new student record
-router.get('/', protect, authorize('teacher', 'admin'), getStudents);
-router.post('/', protect, authorize('teacher', 'admin'), createStudent);
+const router = express.Router();
 
-// 👤 PROTECTED: Any logged-in user can view a specific student (e.g., Parent viewing their child)
-router.get('/:id', protect, getStudentById);
+// 🛡️ Publicly accessible or protected? 
+// Let's protect them as we discussed earlier.
+router.route('/')
+  .get(protect, getStudents) // 🟢 Only declared ONCE now
+  .post(protect, authorize('admin', 'teacher'), createStudent);
 
-/**
- * 🎯 PERFORMANCE UPDATES
- * Only Teachers and Admins can modify grades
- */
-router.patch(
-  '/:id/performance', 
-  protect, 
-  authorize('teacher', 'admin'), 
-  updatePerformance
-);
+router.route('/:id')
+  .get(protect, getStudentById)
+  .put(protect, authorize('admin', 'teacher'), updateStudent)
+  .delete(protect, authorize('admin'), deleteStudent);
 
 export default router;
