@@ -1,24 +1,24 @@
 /**
- * 🎓 STUDENT DATA VIEWER
- * Fetches and displays seeded student data from the MongoDB database.
+ * 🎓 INTERACTIVE STUDENT LIST
+ * Features: Real-time search and hover animations.
  */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { FaSearch, FaUserGraduate } from "react-icons/fa";
 import "./StudentList.css";
 
 const StudentList = () => {
   const [students, setStudents] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // 🔍 Search State
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        // Get the token from localStorage (saved during our Bypass Login)
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
         const config = {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         };
-
         const { data } = await axios.get(
           "http://localhost:5000/api/students",
           config,
@@ -26,43 +26,66 @@ const StudentList = () => {
         setStudents(data);
         setLoading(false);
       } catch (error) {
-        console.error("❌ Error fetching seeded data:", error);
         setLoading(false);
       }
     };
-
     fetchStudents();
   }, []);
 
-  if (loading) return <div className="loader">Loading Seeded Students...</div>;
+  // 🧪 FILTER LOGIC: Updates as you type
+  const filteredStudents = students.filter(
+    (student) =>
+      student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.admissionNumber.includes(searchTerm),
+  );
+
+  if (loading) return <div className="loader">Loading...</div>;
 
   return (
     <div className="student-container">
-      <h2 className="title">🎓 Seeded Student Records</h2>
+      <div className="header-section">
+        <h2 className="title">🎓 Student Records</h2>
+
+        {/* 🔍 SEARCH BAR */}
+        <div className="search-box">
+          <FaSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search by name or ID..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
+
       <div className="student-grid">
-        {students.map((student) => (
-          <div key={student._id} className="student-card">
-            <h3>{student.name}</h3>
-            <p>
-              <strong>ID:</strong> {student.admissionNumber}
-            </p>
-            <p>
-              <strong>Grade:</strong> {student.grade}
-            </p>
-            <div className="performance-box">
-              <span>Math: {student.performance?.math}%</span>
-              <span>Sci: {student.performance?.science}%</span>
-              <span>Eng: {student.performance?.english}%</span>
+        {filteredStudents.length > 0 ? (
+          filteredStudents.map((student) => (
+            <div key={student._id} className="student-card interactive">
+              <div className="card-header">
+                <FaUserGraduate className="grad-icon" />
+                <h3>{student.name}</h3>
+              </div>
+              <p>
+                <strong>ID:</strong> {student.admissionNumber}
+              </p>
+              <div className="performance-box">
+                <span>Math: {student.performance?.math}</span>
+                <span>Eng: {student.performance?.english}</span>
+              </div>
             </div>
-            {/* Displaying populated data from the 'teacher' reference */}
-            <p className="teacher-note">
-              Assigned to: {student.teacher?.name || "TBA"}
-            </p>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="no-results">
+            No students found matching "{searchTerm}"
+          </p>
+        )}
       </div>
     </div>
   );
 };
 
 export default StudentList;
+
+
+

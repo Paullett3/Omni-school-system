@@ -1,4 +1,56 @@
 /* 🎓 Student List Styles */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* 🔍 Modern Search Input */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-box input {
+  padding: 12px 15px 12px 40px;
+  width: 300px;
+  background: #2a2a2a;
+  border: 1px solid var(--silver);
+  border-radius: 25px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  outline: none;
+  width: 350px;
+  border-color: #4cc9f0;
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.3);
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  color: var(--silver);
+}
+
+/* ✨ Interactive Hover */
+.student-card.interactive:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: #252525;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.no-results {
+  color: var(--silver);
+  grid-column: 1 / -1;
+  text-align: center;
+  font-style: italic;
+}
 .student-container {
   padding: 40px;
   background-color: var(--primary-black);
