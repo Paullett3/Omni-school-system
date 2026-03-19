@@ -1,44 +1,66 @@
-/**
- * PROJECT: Omni School System
- * COMPONENT: StudentList
- * DESCRIPTION: Displays students in a clean, colorful table.
- */
+// src/components/StudentList.jsx
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-import React from 'react';
+const StudentList = () => {
+  const [students, setStudents] = useState([]);
 
-const StudentList = ({ students, deleteStudent }) => {
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/students', {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        });
+        setStudents(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchStudents();
+  }, []);
+
   return (
-    <div style={containerStyle}>
-      <h3 style={{color: '#2c3e50'}}>📋 Student Roster</h3>
-      <table style={tableStyle}>
-        <thead>
-          <tr style={headerStyle}>
-            <th>Name</th>
-            <th>Class</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {students.map(s => (
-            <tr key={s.id} style={rowStyle}>
-              <td>{s.name}</td>
-              <td>{s.room}</td>
-              <td>
-                <button onClick={() => deleteStudent(s.id)} style={deleteBtn}>Delete</button>
-              </td>
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-4">Students Performance</h2>
+      
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-200">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="px-6 py-3 text-left">Name</th>
+              <th className="px-6 py-3 text-left">Admission No</th>
+              <th className="px-6 py-3 text-left">Grade</th>
+              <th className="px-6 py-3 text-center">Math</th>
+              <th className="px-6 py-3 text-center">English</th>
+              <th className="px-6 py-3 text-center">Science</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {students.map(student => (
+              <tr key={student._id} className="border-t hover:bg-gray-50">
+                <td className="px-6 py-4">{student.name}</td>
+                <td className="px-6 py-4">{student.admissionNumber}</td>
+                <td className="px-6 py-4">{student.grade}</td>
+                <td className="px-6 py-4 text-center">
+                  {student.performance?.math ?? '-'}%
+                </td>
+                <td className="px-6 py-4 text-center">
+                  {student.performance?.english ?? '-'}%
+                </td>
+                <td className="px-6 py-4 text-center">
+                  {student.performance?.science ?? '-'}%
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {students.length === 0 && (
+        <p className="text-center text-gray-500 mt-8">No students found</p>
+      )}
     </div>
   );
 };
-
-
-const containerStyle = { marginTop: '20px', padding: '15px', background: '#fff', borderRadius: '8px' };
-const tableStyle = { width: '100%', borderCollapse: 'collapse' };
-const headerStyle = { background: '#f8f9fa', textAlign: 'left' };
-const rowStyle = { borderBottom: '1px solid #eee' };
-const deleteBtn = { color: 'red', border: 'none', background: 'none', cursor: 'pointer', fontWeight: 'bold' };
 
 export default StudentList;
