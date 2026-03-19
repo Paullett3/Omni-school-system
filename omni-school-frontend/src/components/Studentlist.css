@@ -1,0 +1,55 @@
+/* 🎓 Student List Styles */
+.student-container {
+  padding: 40px;
+  background-color: var(--primary-black);
+  min-height: 100vh;
+}
+
+.title {
+  color: var(--silver);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  border-bottom: 1px solid var(--silver);
+  padding-bottom: 10px;
+}
+
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.student-card {
+  background: #1e1e1e;
+  border: 1px solid var(--silver);
+  padding: 20px;
+  border-radius: 10px;
+  color: var(--silver);
+  transition: transform 0.3s ease;
+}
+
+.student-card:hover {
+  transform: scale(1.03);
+  border-color: var(--white);
+}
+
+.performance-box {
+  display: flex;
+  justify-content: space-between;
+  background: #2a2a2a;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 0.8rem;
+}
+
+.teacher-note {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 10px;
+}
+
+
+
