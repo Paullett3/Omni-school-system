@@ -4,20 +4,25 @@
  * ---------------------------------------
  */
 
-import Student from '../models/Student.js'; // 🟢 Ensure this file exists!
+import Student from "../models/Student.js"; // 🟢 Ensure this file exists!
 
 // 🔍 GET ALL STUDENTS
 export const getStudents = async (req, res) => {
   try {
     // We use .populate to pull in linked User data for parents and teachers
     const students = await Student.find()
-      .populate('parent', 'name email')
-      .populate('teacher', 'name email');
-    
-    console.log(`\x1b[32m%s\x1b[0m`, `✅ Fetched ${students.length} students successfully.`);
+      .populate("parent", "name email")
+      .populate("teacher", "name email");
+
+    console.log(
+      `\x1b[32m%s\x1b[0m`,
+      `✅ Fetched ${students.length} students successfully.`,
+    );
     res.status(200).json(students);
   } catch (error) {
-    res.status(500).json({ message: `❌ Error fetching students: ${error.message}` });
+    res
+      .status(500)
+      .json({ message: `❌ Error fetching students: ${error.message}` });
   }
 };
 
@@ -28,15 +33,17 @@ export const createStudent = async (req, res) => {
       name,
       admissionNumber,
       grade,
-      performance = {}, 
+      performance = {},
       parent,
-      teacher
+      teacher,
     } = req.body;
 
     // Check if admission number already exists
     const existingStudent = await Student.findOne({ admissionNumber });
     if (existingStudent) {
-      return res.status(400).json({ message: "Admission number already exists" });
+      return res
+        .status(400)
+        .json({ message: "Admission number already exists" });
     }
 
     const student = new Student({
@@ -45,15 +52,27 @@ export const createStudent = async (req, res) => {
       grade,
       performance,
       parent,
-      teacher
+      teacher,
     });
 
     const savedStudent = await student.save();
-    
-    console.log(`\x1b[34m%s\x1b[0m`, `👤 Student Created: ${name} (${admissionNumber})`);
+
+    console.log(
+      `\x1b[34m%s\x1b[0m`,
+      `👤 Student Created: ${name} (${admissionNumber})`,
+    );
     res.status(201).json(savedStudent);
   } catch (error) {
     res.status(400).json({ message: `❌ Validation Error: ${error.message}` });
+  }
+};
+export const deleteStudent = async (req, res) => {
+  try {
+    const student = await Student.findByIdAndDelete(req.params.id);
+    if (!student) return res.status(404).json({ message: "Student not found" });
+    res.json({ message: "Student removed successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -61,18 +80,18 @@ export const createStudent = async (req, res) => {
 export const getStudentById = async (req, res) => {
   try {
     const student = await Student.findById(req.params.id)
-      .populate('parent', 'name email')
-      .populate('teacher', 'name email');
+      .populate("parent", "name email")
+      .populate("teacher", "name email");
 
     if (!student) {
-      return res.status(404).json({ message: 'Student not found' });
+      return res.status(404).json({ message: "Student not found" });
     }
 
     res.status(200).json(student);
   } catch (error) {
     // Handle invalid MongoDB IDs
-    if (error.kind === 'ObjectId') {
-      return res.status(404).json({ message: 'Invalid Student ID format' });
+    if (error.kind === "ObjectId") {
+      return res.status(404).json({ message: "Invalid Student ID format" });
     }
     res.status(500).json({ message: error.message });
   }
@@ -96,14 +115,17 @@ export const updatePerformance = async (req, res) => {
           "performance.science": science,
         },
       },
-      { new: true, runValidators: true } // Return the updated document
+      { new: true, runValidators: true }, // Return the updated document
     );
 
     if (!updatedStudent) {
       return res.status(404).json({ message: "Student not found" });
     }
 
-    console.log(`\x1b[33m%s\x1b[0m`, `📊 Performance Updated for: ${updatedStudent.name}`);
+    console.log(
+      `\x1b[33m%s\x1b[0m`,
+      `📊 Performance Updated for: ${updatedStudent.name}`,
+    );
     res.status(200).json({
       message: "Grades updated successfully",
       performance: updatedStudent.performance,

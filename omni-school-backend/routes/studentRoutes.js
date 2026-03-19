@@ -19,6 +19,8 @@ import { protect, authorize } from '../middleware/authMiddleware.js';
 /**
  * 🔓 PUBLIC/PROTECTED ROUTES
  */
+// Only Admins can delete students
+router.delete('/:id', protect, authorize('admin'), deleteStudent);
 
 // 👨‍🏫 TEACHER/ADMIN ONLY: View all students or create a new student record
 router.get('/', protect, authorize('teacher', 'admin'), getStudents);
