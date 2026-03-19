@@ -2,10 +2,17 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}", // 👈 This covers all your components
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        schoolPrimary: "#1e40af", // 🔵 Now your custom color will work!
+      },
+    },
   },
   plugins: [],
-}
+};
+
+
+
