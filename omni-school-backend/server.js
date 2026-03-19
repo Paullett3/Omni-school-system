@@ -69,24 +69,40 @@ app.get("/", (req, res) => {
   });
 });
 
-// ⚡ START SERVER
+/**
+ * ⚡ START SERVER
+ * Optimized to handle port conflicts (EADDRINUSE)
+ */
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server on port ${PORT}`));
 
-// 🚨 GLOBAL ERROR HANDLER
-// Catches all errors from routes and sends them to the Frontend
+// Store the server instance in a variable
+const server = app.listen(PORT, () => {
+  console.log("\x1b[36m%s\x1b[0m", "-----------------------------------------");
+  console.log("\x1b[32m%s\x1b[0m", `✅ Server running on port: ${PORT}`);
+  console.log("\x1b[36m%s\x1b[0m", "-----------------------------------------");
+});
+
+// 🛡️ ERROR HANDLING: Catch "Port in Use" error
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    console.log("\x1b[31m%s\x1b[0m", `❌ Port ${PORT} is already busy!`);
+    console.log(
+      "\x1b[33m%s\x1b[0m",
+      `👉 Close other terminals or change PORT in .env`,
+    );
+    process.exit(1); // Exit cleanly so nodemon can wait for changes
+  }
+});
+
+/**
+ * 🚨 GLOBAL ERROR HANDLER
+ */
 app.use((err, req, res, next) => {
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-
   console.error(`\x1b[31m%s\x1b[0m`, `❌ Backend Error: ${err.message}`);
 
   res.status(statusCode).json({
     message: err.message,
     stack: process.env.NODE_ENV === "production" ? null : err.stack,
   });
-});
-app.listen(PORT, () => {
-  console.log("\x1b[36m%s\x1b[0m", "-----------------------------------------");
-  console.log("\x1b[32m%s\x1b[0m", `✅ Server running on port: ${PORT}`);
-  console.log("\x1b[36m%s\x1b[0m", "-----------------------------------------");
 });
