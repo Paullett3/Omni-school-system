@@ -1,57 +1,20 @@
-/* 🔘 Button Variants */
-.btn-base {
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-  border: none;
-  font-weight: 600;
+/**
+ * 🎨 MODERN OMNI-THEME
+ * ---------------------------------------
+ */
+:root {
+  --primary-bg: #0f172a; /* 🌑 Deep Navy Night */
+  --card-bg: #1e293b; /* 🃏 Lighter Slate for Cards */
+  --silver: #cbd5e1; /* 🥈 Soft Slate/Silver */
+  --accent-blue: #38bdf8; /* 💎 Electric Blue for Highlights */
+  --accent-red: #f43f5e; /* 🌹 For Admin/Alerts */
+  --white: #ffffff;
 }
-.btn-primary {
-  background: var(--silver);
-  color: var(--primary-black);
-}
-.btn-danger {
-  background: #e74c3c;
-  color: white;
-}
-.btn-outline {
-  background: transparent;
-  border: 2px solid var(--silver);
+
+body {
+  margin: 0;
+  background-color: var(--primary-bg);
   color: var(--silver);
-}
-
-/* 🃏 Card Styles */
-.card-container {
-  background: #1a1a1a;
-  padding: 2rem;
-  border-radius: 12px;
-  border: 1px solid #333;
-}
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-}
-
-/* 📝 Form Styles */
-.form-group {
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-.form-input {
-  padding: 12px;
-  border-radius: 5px;
-  background: #222;
-  border: 1px solid #444;
-  color: white;
-}
-.input-error {
-  border-color: #e74c3c;
-}
-.error-text {
-  color: #e74c3c;
-  font-size: 0.8rem;
-  margin-top: 5px;
+  font-family: "Inter", sans-serif; /* Modern, clean font */
+  transition: background 0.5s ease;
 }

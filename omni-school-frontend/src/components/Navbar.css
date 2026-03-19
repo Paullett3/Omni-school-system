@@ -1,56 +1,31 @@
 .navbar {
-  background-color: var(--primary-black);
+  background-color: rgba(15, 23, 42, 0.8); /* Semi-transparent */
+  backdrop-filter: blur(10px); /* ✨ Glassmorphism blur */
   padding: 1rem 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--silver);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(203, 213, 225, 0.1); /* Very thin silver border */
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--silver);
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 25px;
+  color: var(--accent-blue); /* Logo now pops with blue */
+  font-size: 1.6rem;
+  letter-spacing: -1px;
 }
 
 .nav-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   color: var(--silver);
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-item:hover {
-  color: var(--white);
-  transform: translateY(-2px);
-}
-
-/* Response for Small Devices (iPhone 4) */
-@media (max-width: 480px) {
-  .navbar {
-    flex-direction: column;
-    padding: 15px;
-    gap: 15px;
-  }
-  
-  .nav-links {
-    gap: 15px;
-    font-size: 0.9rem;
-  }
-  
-  .nav-item span {
-    display: none; /* Only show icons on very small screens to save space */
-  }
+  background-color: rgba(56, 189, 248, 0.1); /* Subtle blue glow */
+  color: var(--accent-blue);
+  transform: translateY(-1px);
 }
