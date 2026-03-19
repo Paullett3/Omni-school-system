@@ -1,18 +1,24 @@
 {
   "version": 2,
   "builds": [
-    { "src": "omni-school-backend/server.js", "use": "@vercel/node" },
-    { "src": "client/package.json", "use": "@vercel/static-build" }
-  ],
-  "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "omni-school-backend/server.js"
+      "src": "omni-school-backend/server.js",
+      "use": "@vercel/node"
     },
     {
-      "src": "/(.*)",
-      "dest": "client/$1",
-      "check": true
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "omni-school-backend/server.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "client/$1"
     }
   ]
 }
