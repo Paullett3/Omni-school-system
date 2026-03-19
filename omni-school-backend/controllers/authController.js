@@ -1,39 +1,42 @@
+import User from "../models/User.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+
 /**
- * 🔐 FIXED LOGIN (Bypass for Development)
+ * 🔐 LOGIN CONTROLLER - Now enforces password 123456 for admin
  */
 export const login = async (req, res) => {
-  const { email } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
 
-    // 🚩 FIX: Check if it's one of our dev emails
-    const devEmails = [
-      "admin@omnischool.ke",
-      "teacher@omnischool.ke",
-      "student@omnischool.ke",
-      "parent@omnischool.ke",
-    ];
-
-    if (user && devEmails.includes(email)) {
-      const token = jwt.sign(
-        { id: user._id, role: user.role },
-        process.env.JWT_SECRET,
-        { expiresIn: "30d" },
-      );
-
-      console.log(`\x1b[35m%s\x1b[0m`, `🔑 Admin/Dev Access Granted: ${email}`);
-      return res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        token,
-      });
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
     }
 
-    // Standard login logic follows here...
-    res.status(401).json({ message: "Invalid credentials or User not found" });
+    // Compare real hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" },
+    );
+
+    console.log(`🔑 Login successful: ${email} (${user.role})`);
+
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      token,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
