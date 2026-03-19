@@ -14,8 +14,10 @@ import Navbar from "./components/Navbar";
 import StudentList from "./components/StudentList";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import ParentPortal from "./pages/ParentPortal";
-import Login from "./components/Login"; // 👈 Add your new Login component
+import AdminDashboard from './pages/AdminDashboard';
+import Login from "./components/Login"; // 👈 new Login component
 import "./App.css";
+
 
 // 🔒 SECURITY GUARD: Redirects to login if no token is found
 const ProtectedRoute = ({ children }) => {
