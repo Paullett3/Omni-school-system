@@ -71,6 +71,8 @@ app.get("/", (req, res) => {
 
 // ⚡ START SERVER
 const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server on port ${PORT}`));
+
 // 🚨 GLOBAL ERROR HANDLER
 // Catches all errors from routes and sends them to the Frontend
 app.use((err, req, res, next) => {
