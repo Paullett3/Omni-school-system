@@ -1,42 +1,28 @@
-/**
- * 👤 USER MODEL
- * Defines the schema for Users and Students in the Omni School System
- */
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
-const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please add a name'], // 🛑 Validation: Name is mandatory
-    trim: true
-  },
-  email: {
-    type: String,
-    required: [true, 'Please add an email'],
-    unique: true, // 📧 Ensures no two users have the same email
-    match: [
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please add a valid email'
-    ]
-  },
-  password: {
-    type: String,
-    required: [true, 'Please add a password'],
-    minlength: 6, // 🔒 Security: Minimum 6 characters
-    select: false // 🕵️‍♂️ Prevents password from being sent in API responses by default
-  },
-  role: {
-    type: String,
-    enum: ['student', 'teacher', 'admin'], // 🏷️ Only these roles are allowed
-    default: 'student'
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now // 📅 Automatically adds a timestamp
-  }
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    role: { 
+        type: String, 
+        enum: ['admin', 'teacher', 'parent'], 
+        default: 'teacher' 
+    }
+}, { timestamps: true });
+
+// Hash password before saving to DB
+userSchema.pre('save', async function(next) {
+    if (!this.isModified('password')) return next();
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
 });
 
-// ✨ PRO TIP: Create the model and export it using ES6 syntax
-const User = mongoose.model('User', UserSchema);
+// Method to compare entered password with hashed password
+userSchema.methods.matchPassword = async function(enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
 
-export default User;
+export default mongoose.model('User', userSchema);
