@@ -1,0 +1,37 @@
+.add-student-card {
+  background: #1e1e1e;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid var(--silver);
+  margin-bottom: 30px;
+  max-width: 500px;
+}
+
+.add-student-card h3 { color: var(--silver); margin-bottom: 20px; }
+
+.form-group { margin-bottom: 15px; }
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 5px;
+  color: white;
+}
+
+.form-group input:focus { border-color: var(--silver); outline: none; }
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2ecc71; /* Green for "Add" */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover { background: #27ae60; }

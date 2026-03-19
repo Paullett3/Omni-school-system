@@ -71,7 +71,33 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
 
+/* 🗑️ Delete Button Styling */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  color: #ff4d4d; /* 🚩 Warning Red */
+  transform: scale(1.2);
+}
+
+.grad-icon {
+  color: var(--silver);
+  font-size: 1.5rem;
+}
 .student-card {
   background: #1e1e1e;
   border: 1px solid var(--silver);
