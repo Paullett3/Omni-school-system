@@ -47,7 +47,7 @@ const app = express();
 // 🟢 FIX: Specifically allow your React Frontend (usually port 3000 or 5173)
 app.use(
   cors({
-    origin: "http://localhost:3000", // Change to 5173 if using Vite
+    origin: "http://localhost:5173", // Change to 5173 if using Vite
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   }),
