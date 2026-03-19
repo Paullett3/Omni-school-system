@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "description": "Backend for Omni School System - MERN Stack",
   "main": "server.js",
-  "type": "module", 
+  "type": "module",
   "scripts": {
     "start": "node server.js",
     "seed": "node seed.js",
     "dev": "nodemon server.js",
     "build": "npm install"
   },
-  
   "keywords": [
     "mern",
     "school-system",
@@ -24,7 +23,7 @@
     "dotenv": "^16.6.1",
     "express": "^4.22.1",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.3.0"
+    "mongoose": "^7.8.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
