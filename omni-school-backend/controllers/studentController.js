@@ -77,3 +77,38 @@ export const getStudentById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+/**
+ * 📈 UPDATE STUDENT PERFORMANCE
+ * Allows teachers to update specific grades (Math, English, Science)
+ */
+export const updatePerformance = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { math, english, science } = req.body;
+
+    // Find student and update only the performance fields
+    const updatedStudent = await Student.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          "performance.math": math,
+          "performance.english": english,
+          "performance.science": science,
+        },
+      },
+      { new: true, runValidators: true } // Return the updated document
+    );
+
+    if (!updatedStudent) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    console.log(`\x1b[33m%s\x1b[0m`, `📊 Performance Updated for: ${updatedStudent.name}`);
+    res.status(200).json({
+      message: "Grades updated successfully",
+      performance: updatedStudent.performance,
+    });
+  } catch (error) {
+    res.status(400).json({ message: `❌ Update Failed: ${error.message}` });
+  }
+};
