@@ -1,186 +1,57 @@
-/* 1. Variables & Global Styles */
-:root {
-  --primary-black: #1a1a1a;
-  --silver: #C0C0C0;
-  --dark-grey: #333333;
-  --light-grey: #f4f4f4;
-  --white: #ffffff;
+/* 🔘 Button Variants */
+.btn-base {
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+  font-weight: 600;
 }
-
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-
-body {
-  background-color: var(--white);
+.btn-primary {
+  background: var(--silver);
   color: var(--primary-black);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.6;
+}
+.btn-danger {
+  background: #e74c3c;
+  color: white;
+}
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--silver);
+  color: var(--silver);
 }
 
+/* 🃏 Card Styles */
+.card-container {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
 
-.app-main {
-  min-height: 100vh;
+/* 📝 Form Styles */
+.form-group {
+  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-}
-
-
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-
-/* 2. Silver & Black Interactive Elements */
-button,
-.btn-primary {
-  background-color: var(--primary-black);
-  color: var(--silver);
-  padding: 10px 20px;
-  border: 1px solid var(--silver);
-  border-radius: 4px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px; /* Space for icons */
-}
-
-
-button:hover,
-.btn-primary:hover {
-  background-color: var(--silver);
-  color: var(--primary-black);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-
-button:active,
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-
-/* 3. Multi-Device Responsiveness Dashboard */
-
-
-/* Small Tablets / Large Phones (e.g., iPhone Max, Pixel) */
-@media (max-width: 768px) {
-  .container {
-    padding: 15px;
-  }
- 
-  h1 {
-    font-size: 1.8rem;
-  }
-}
-
-
-/* Tablets (iPad) */
-@media (max-width: 1024px) {
-  .nav-links {
-    gap: 15px;
-  }
-}
-
-
-/* iPhone 4 & Very Small Screens (320px) */
-@media (max-width: 320px) {
-  .container {
-    padding: 10px;
-  }
-
-
-  h1 {
-    font-size: 1.2rem;
-    text-align: center;
-  }
-
-
-  .nav-links {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-  }
-
-
-  button, .btn-primary {
-    width: 100%; /* Stack buttons on tiny screens */
-    padding: 12px;
-  }
-}
-
-
-/* 4. Utility Classes */
-.text-silver { color: var(--silver); }
-.bg-black { background-color: var(--primary-black); }
-
-/* 🏫 OMNI SCHOOL DASHBOARD STYLES */
-
-.dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  font-family: 'Inter', sans-serif;
-}
-
-/* 📊 Table Styling */
-.bg-white {
-  background-color: #ffffff;
-}
-
-.shadow-lg {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-table {
-  width: 100%;
-  border-spacing: 0;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-thead tr {
-  background-color: #1e40af; /* Deep Kenyan Blue */
-  color: #ffffff;
   text-align: left;
 }
-
-th, td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #e5e7eb;
+.form-input {
+  padding: 12px;
+  border-radius: 5px;
+  background: #222;
+  border: 1px solid #444;
+  color: white;
 }
-
-tbody tr:hover {
-  background-color: #f8fafc; /* Subtle hover effect */
-  cursor: pointer;
+.input-error {
+  border-color: #e74c3c;
 }
-
-/* 🟢 Performance Highlighters */
-.text-green-600 {
-  color: #16a34a;
-  font-weight: bold;
-}
-
-.text-orange-500 {
-  color: #f97316;
-}
-
-/* 🗑️ Action Buttons */
-.text-red-500:hover {
-  color: #dc2626;
-  transform: scale(1.2);
-  transition: 0.2s;
+.error-text {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 5px;
 }
