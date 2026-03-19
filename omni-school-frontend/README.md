@@ -33,7 +33,10 @@ Custom overrides for iPhone 4 (320px) ensuring no horizontal scrolling and reada
 ### Auth Routes (`/api/auth`)
 - `POST /register`: Accepts `name`, `email`, `password`, `role`. Hashes password and saves user.
 - `POST /login`: Authenticates user and returns a **JWT Token**.
-
+## 🛡️ Middleware Logic
+protect: Intercepts Bearer tokens and decodes the payload without extra DB hits (Stateless Auth).
+authorize: High-order function that gates access to routes based on the `role` stored in the JWT.
+Logging: Implemented terminal color-coding for rapid debugging of unauthorized access attempts.
 ### Student Routes (`/api/students`)
 - `GET /`: Returns a list of all students (hides passwords).
 - `PUT /:id`: Updates student information by MongoDB ID.
